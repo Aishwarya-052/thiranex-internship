@@ -7,17 +7,34 @@
     <meta name="description" content="Get in touch with Jane Doe for web development projects.">
     <meta name="robots" content="index, follow">
     <style>
-        :root { --bg-color: #ffffff; --text-color: #212529; --primary-color: #0056b3; }
-        body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; background-color: var(--bg-color); color: var(--text-color); }
-        header { border-bottom: 2px solid #eaeaea; padding: 1rem; }
-        nav ul { list-style: none; padding: 0; display: flex; gap: 1.5rem; }
-        nav a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
-        main { max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
-        form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; }
-        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-        input, textarea { padding: 0.6rem; font-size: 1rem; border: 1px solid #767676; border-radius: 4px; }
-        button { padding: 0.8rem; background-color: var(--primary-color); color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; }
-        footer { text-align: center; padding: 2rem; background-color: #f8f9fa; margin-top: 4rem; }
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.6; padding: 0 1rem; }
+        header { max-width: 600px; margin: 0 auto; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        header h1 { font-size: 1.5rem; color: var(--primary); }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        nav a:hover, nav a:focus { color: var(--primary); outline: none; }
+        nav a[aria-current="page"] { color: var(--primary); border-bottom: 2px solid var(--primary); }
+        main { max-width: 600px; margin: 3rem auto; background: var(--bg-card); padding: 2.5rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .section-title { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); margin-bottom: 2rem; }
+        form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        label { font-weight: 600; font-size: 0.95rem; }
+        input, textarea { padding: 0.75rem; font-size: 1rem; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #fff; width: 100%; color: var(--text-dark); }
+        input:focus, textarea:focus { outline: 3px solid var(--primary); border-color: transparent; }
+        button { padding: 0.85rem; background-color: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 6px; font-size: 1rem; transition: background 0.2s; }
+        button:hover { background-color: var(--primary-hover); }
+        button:focus { outline: 3px solid var(--text-dark); }
+        footer { max-width: 600px; margin: 4rem auto 2rem auto; text-align: center; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #e2e8f0; padding-top: 2rem; }
     </style>
 </head>
 <body>
@@ -33,7 +50,8 @@
     </header>
     <main id="main-content">
         <section aria-labelledby="contact-heading">
-            <h2 id="contact-heading">Contact Me</h2>
+            <h2 id="contact-heading" class="section-title">Contact Me</h2>
+            <p class="subtitle">Please fill out the keyboard-accessible form parameters below.</p>
             <form action="#" method="POST">
                 <div class="form-group">
                     <label id="label-name" for="user-name">Full Name (Required)</label>
