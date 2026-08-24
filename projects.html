@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Jane Doe Portfolio</title>
+    <meta name="description" content="Explore a collection of accessible web development projects.">
+    <meta name="robots" content="index, follow">
+    <style>
+        :root { --bg-color: #ffffff; --text-color: #212529; --primary-color: #0056b3; }
+        body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; background-color: var(--bg-color); color: var(--text-color); }
+        header { border-bottom: 2px solid #eaeaea; padding: 1rem; }
+        nav ul { list-style: none; padding: 0; display: flex; gap: 1.5rem; }
+        nav a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+        main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        section { margin-bottom: 3rem; }
+        article { border: 1px solid #ccc; padding: 1.5rem; margin-top: 1rem; border-radius: 4px; }
+        footer { text-align: center; padding: 2rem; background-color: #f8f9fa; margin-top: 4rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jane Doe</h1>
+        <nav aria-label="Main Website Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" aria-current="page">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main-content">
+        <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading">My Projects</h2>
+            <article>
+                <h3>01. E-Commerce Web Application</h3>
+                <p>An accessible online store prioritizing swift screen reader navigation.</p>
+            </article>
+            <article>
+                <h3>02. Task Management Dashboard</h3>
+                <p>A web application built using native landmarks and dynamic status updates.</p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Jane Doe. All rights reserved.</p>
+    </footer>
+</body>
+</html>
