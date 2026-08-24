@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Doe | Professional Portfolio</title>
+    <meta name="description" content="Professional portfolio of Jane Doe, a frontend developer specializing in modern, accessible websites.">
+    <meta name="robots" content="index, follow">
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.6; padding: 0 1rem; }
+        header { max-width: 1000px; margin: 0 auto; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        header h1 { font-size: 1.5rem; color: var(--primary); }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 1rem; padding: 0.5rem 0; transition: color 0.2s; }
+        nav a:hover, nav a:focus { color: var(--primary); outline: none; }
+        nav a[aria-current="page"] { color: var(--primary); border-bottom: 2px solid var(--primary); }
+        main { max-width: 1000px; margin: 3rem auto; }
+        .hero { text-align: center; padding: 4rem 1rem; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 12px; margin-bottom: 3rem; }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        article { background: var(--bg-card); border: 1px solid #e2e8f0; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        article h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        article p { color: var(--text-muted); margin-bottom: 1.5rem; }
+        .btn { display: inline-block; background-color: var(--primary); color: white; padding: 0.75rem 1.5rem; text-decoration: none; font-weight: 600; border-radius: 6px; transition: background 0.2s; }
+        .btn:hover, .btn:focus { background-color: var(--primary-hover); outline: 3px solid var(--text-dark); }
+        footer { max-width: 1000px; margin: 6rem auto 2rem auto; text-align: center; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #e2e8f0; padding-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jane Doe</h1>
+        <nav aria-label="Main Website Navigation">
+            <ul>
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main-content">
+        <section class="hero" aria-labelledby="hero-heading">
+            <h2 id="hero-heading">Building Accessible Experiences for the Web</h2>
+            <p>Welcome to my portfolio! I am a passionate developer focused on writing clean, semantic, and modern frontend code.</p>
+        </section>
+        <section aria-labelledby="featured-heading">
+            <h2 id="featured-heading" class="section-title">Featured Project</h2>
+            <article>
+                <h3>E-Commerce Web Application</h3>
+                <p>A fully responsive online store featuring advanced accessibility tools, crisp color contrast layouts, and fully trackable keyboard navigation workflows.</p>
+                <a href="projects.html" class="btn" aria-label="View more details about the E-Commerce project">View Project Details</a>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Jane Doe. All rights reserved.</p>
+    </footer>
+</body>
+</html>
