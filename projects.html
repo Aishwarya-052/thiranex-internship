@@ -3,47 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Jane Doe Portfolio</title>
-    <meta name="description" content="Explore a collection of accessible web development projects.">
-    <meta name="robots" content="index, follow">
-    <style>
-        :root { --bg-color: #ffffff; --text-color: #212529; --primary-color: #0056b3; }
-        body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; background-color: var(--bg-color); color: var(--text-color); }
-        header { border-bottom: 2px solid #eaeaea; padding: 1rem; }
-        nav ul { list-style: none; padding: 0; display: flex; gap: 1.5rem; }
-        nav a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
-        main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        section { margin-bottom: 3rem; }
-        article { border: 1px solid #ccc; padding: 1.5rem; margin-top: 1rem; border-radius: 4px; }
-        footer { text-align: center; padding: 2rem; background-color: #f8f9fa; margin-top: 4rem; }
-    </style>
+    <!-- Required Task Optimization: Meta tags for SEO -->
+    <meta name="description" content="Explore my portfolio of web engineering projects built using responsive design layouts and strict semantic HTML5.">
+    <title>My Projects | Portfolio Accessibility</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Crucial WCAG Requirement: Skip navigation link for screen reader users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header>
-        <h1>Jane Doe</h1>
-        <nav aria-label="Main Website Navigation">
+        <nav aria-label="Primary Navigation">
+            <div class="logo">DevPortfolio</div>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html" aria-current="page">Projects</a></li>
-                <li><a href="contact.html">Contact Me</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
+
+    <!-- Semantic element wrapping page focal content -->
     <main id="main-content">
-        <section aria-labelledby="projects-heading">
-            <h2 id="projects-heading">My Projects</h2>
-            <article>
-                <h3>01. E-Commerce Web Application</h3>
-                <p>An accessible online store prioritizing swift screen reader navigation.</p>
-            </article>
-            <article>
-                <h3>02. Task Management Dashboard</h3>
-                <p>A web application built using native landmarks and dynamic status updates.</p>
-            </article>
+        <section aria-labelledby="projects-title">
+            <h1 id="projects-title">My Web Projects</h1>
+            <p>Below is a curated breakdown of my application builds. All projects meet high web accessibility profiles.</p>
+
+            <div class="projects-container">
+                <!-- Independent, modular component structure -->
+                <article class="project-card">
+                    <h2>E-Commerce Platform</h2>
+                    <p>Built a responsive store interface featuring optimized core web vitals and structured navigation parameters.</p>
+                    <a href="#" aria-label="View E-Commerce Platform source code on GitHub">View Source Code</a>
+                </article>
+
+                <article class="project-card">
+                    <h2>Task Management Dashboard</h2>
+                    <p>An interactive, keyboard-navigable workflow board managing daily asynchronous database actions.</p>
+                    <a href="#" aria-label="Launch Task Management live application demo">View Live Demo</a>
+                </article>
+            </div>
         </section>
+
+        <!-- Aside tag context placement -->
+        <aside aria-label="Technical Proficiencies">
+            <h3>Core Framework Toolkit</h3>
+            <ul>
+                <li>Strict Semantic HTML5 / CSS3 Layouts</li>
+                <li>WCAG 2.1 Web Accessibility Standards</li>
+                <li>Search Engine Optimization Best Practices</li>
+            </ul>
+        </aside>
     </main>
+
     <footer>
-        <p>&copy; 2026 Jane Doe. All rights reserved.</p>
+        <p>&copy; 2026 Skills Development Portfolio. Built following modern accessibility standards.</p>
     </footer>
+
 </body>
 </html>
