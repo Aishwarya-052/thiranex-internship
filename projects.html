@@ -3,63 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Required Task Optimization: Meta tags for SEO -->
-    <meta name="description" content="Explore my portfolio of web engineering projects built using responsive design layouts and strict semantic HTML5.">
-    <title>My Projects | Portfolio Accessibility</title>
+    <title>Projects - Thiranex Tasks</title>
+    <!-- Link to your existing external stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Crucial WCAG Requirement: Skip navigation link for screen reader users -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="todo-container">
+    <h1>JavaScript Logic & State Management</h1>
+    
+    <!-- CREATE Component -->
+    <form id="todo-form" class="input-group">
+        <input type="text" id="todo-input" placeholder="Add a new task..." required>
+        <button type="submit" class="btn-add">Add Task</button>
+    </form>
 
-    <header>
-        <nav aria-label="Primary Navigation">
-            <div class="logo">DevPortfolio</div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html" aria-current="page">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- FILTER Buttons -->
+    <div class="filters" id="filter-container">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
 
-    <!-- Semantic element wrapping page focal content -->
-    <main id="main-content">
-        <section aria-labelledby="projects-title">
-            <h1 id="projects-title">My Web Projects</h1>
-            <p>Below is a curated breakdown of my application builds. All projects meet high web accessibility profiles.</p>
+    <!-- READ / UPDATE / DELETE Container -->
+    <ul class="todo-list" id="todo-list"></ul>
+</div>
 
-            <div class="projects-container">
-                <!-- Independent, modular component structure -->
-                <article class="project-card">
-                    <h2>E-Commerce Platform</h2>
-                    <p>Built a responsive store interface featuring optimized core web vitals and structured navigation parameters.</p>
-                    <a href="#" aria-label="View E-Commerce Platform source code on GitHub">View Source Code</a>
-                </article>
+<!-- Embedded logic ensuring state management and delegated event handling work smoothly -->
+<script>
+    // --- STATE MANAGEMENT ---
+    const defaultTodos = [
+        { id: "1", text: "Setup project repository", completed: true },
+        { id: "2", text: "Design HTML/CSS layout", completed: true }
+    ];
 
-                <article class="project-card">
-                    <h2>Task Management Dashboard</h2>
-                    <p>An interactive, keyboard-navigable workflow board managing daily asynchronous database actions.</p>
-                    <a href="#" aria-label="Launch Task Management live application demo">View Live Demo</a>
-                </article>
-            </div>
-        </section>
+    let todos = JSON.parse(localStorage.getItem('todos')) || defaultTodos;
+    let currentFilter = 'all';
 
-        <!-- Aside tag context placement -->
-        <aside aria-label="Technical Proficiencies">
-            <h3>Core Framework Toolkit</h3>
-            <ul>
-                <li>Strict Semantic HTML5 / CSS3 Layouts</li>
-                <li>WCAG 2.1 Web Accessibility Standards</li>
-                <li>Search Engine Optimization Best Practices</li>
-            </ul>
-        </aside>
-    </main>
+    if (!localStorage.getItem('todos')) {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
 
-    <footer>
-        <p>&copy; 2026 Skills Development Portfolio. Built following modern accessibility standards.</p>
-    </footer>
+    const todoForm = document.getElementById('todo-form');
+    const todoInput = document.getElementById('todo-input');
+    const todoList = document.getElementById('todo-list');
+    const filterContainer = document.getElementById('filter-container');
 
+    function saveToLocalStorage() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    // --- RENDER FUNCTION ---
+    function render() {
+        todoList.innerHTML = '';
+
+        const filteredTodos = todos.filter(todo => {
+            if (currentFilter === 'active') return !todo.completed;
+            if (currentFilter === 'completed') return todo.completed;
+            return true;
+        });
+
+        filteredTodos.forEach(todo => {
+            const li = document.createElement('li');
+            li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            li.dataset.id = todo.id;
+
+            li.innerHTML = `
+                <div class="todo-content">
+                    <input type="checkbox" class="toggle-checkbox" ${todo.completed ? 'checked' : ''}>
+                    <span>${todo.text}</span>
+                </div>
+                <div class="actions">
+                    <button class="btn-edit">Edit</button>
+                    <button class="btn-delete">Delete</button>
+                </div>
+            `;
+            todoList.appendChild(li);
+        });
+    }
+
+    // --- CRUD DELEGATION ---
+    todoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const taskText = todoInput.value.trim();
+        if (!taskText) return;
+
+        todos.push({ id: Date.now().toString(), text: taskText, completed: false });
+        saveToLocalStorage();
+        render();
+        todoInput.value = '';
+    });
+
+    todoList.addEventListener('click', (e) => {
+        const todoItem = e.target.closest('.todo-item');
+        if (!todoItem) return;
+        const id = todoItem.dataset.id;
+
+        if (e.target.classList.contains('toggle-checkbox')) {
+            todos = todos.map(todo => todo.id === id ? { ...todo, completed: e.target.checked } : todo);
+            saveToLocalStorage();
+            render();
+        }
+
+        if (e.target.classList.contains('btn-edit')) {
+            const todo = todos.find(t => t.id === id);
+            const newText = prompt('Update task name:', todo.text);
+            if (newText && newText.trim()) {
+                todo.text = newText.trim();
+                saveToLocalStorage();
+                render();
+            }
+        }
+
+        if (e.target.classList.contains('btn-delete')) {
+            todos = todos.filter(todo => todo.id !== id);
+            saveToLocalStorage();
+            render();
+        }
+    });
+
+    filterContainer.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('filter-btn')) return;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.filter;
+        render();
+    });
+
+    render();
+</script>
 </body>
 </html>
