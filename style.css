@@ -1,3 +1,4 @@
+/* --- Your Existing Base Styles --- */
 body {
     font-family: system-ui, -apple-system, sans-serif;
     line-height: 1.6;
@@ -28,6 +29,10 @@ nav a {
     text-decoration: none;
     color: #333;
 }
+nav a.active {
+    font-weight: bold;
+    color: #0056b3;
+}
 /* MANDATORY FOR TASK REQS: Visible keyboard focus styling framework */
 a:focus, button:focus, input:focus, textarea:focus {
     outline: 3px solid #0056b3;
@@ -56,4 +61,120 @@ footer {
     margin-top: 4rem;
     background-color: #f8f9fa;
     border-top: 1px solid #e0e0e0;
+}
+
+/* --- Added Application Styles (Merged Seamlessly) --- */
+.todo-container {
+    max-width: 550px;
+    margin: 2rem auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+.brand-section {
+    margin-bottom: 1.5rem;
+}
+.brand-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0056b3;
+}
+.brand-subtitle {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    display: block;
+}
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.input-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.btn-add {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.filter-btn {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+.filter-btn.active {
+    background: #1a1a1a;
+    color: white;
+}
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    border-left: 5px solid #0056b3;
+}
+.todo-item.completed {
+    border-left-color: #28a745;
+    opacity: 0.7;
+}
+.todo-item.completed span {
+    text-decoration: line-through;
+    color: #666;
+}
+.todo-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.actions {
+    display: flex;
+    gap: 6px;
+}
+.btn-edit {
+    background: #ffc107;
+    color: #000;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
 }
