@@ -4,34 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Thiranex Tasks</title>
-    <!-- Link to your existing external stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="todo-container">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header>
+    <nav>
+        <div class="brand-section">
+            <span class="brand-title">Thiranex</span>
+            <span class="brand-subtitle">Skill Development & Future Tech</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="main-content">
     <h1>JavaScript Logic & State Management</h1>
+    <p>Develop an interactive, client-side To-Do List application to master DOM manipulation, event handling, and local data persistence.</p>
     
-    <!-- CREATE Component -->
-    <form id="todo-form" class="input-group">
-        <input type="text" id="todo-input" placeholder="Add a new task..." required>
-        <button type="submit" class="btn-add">Add Task</button>
-    </form>
+    <div class="todo-container">
+        <!-- CREATE Feature Component -->
+        <form id="todo-form" class="input-group">
+            <input type="text" id="todo-input" placeholder="Add a new task objective..." required>
+            <button type="submit" class="btn-add">Add</button>
+        </form>
 
-    <!-- FILTER Buttons -->
-    <div class="filters" id="filter-container">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="active">Active</button>
-        <button class="filter-btn" data-filter="completed">Completed</button>
+        <!-- ADVANCED FILTERING Controls -->
+        <div class="filters" id="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <!-- READ, UPDATE, DELETE Dynamic List Container -->
+        <ul class="todo-list" id="todo-list"></ul>
     </div>
+</main>
 
-    <!-- READ / UPDATE / DELETE Container -->
-    <ul class="todo-list" id="todo-list"></ul>
-</div>
+<footer>
+    <p>System developed and maintained by Team Emogi (emogi.in)</p>
+</footer>
 
-<!-- Embedded logic ensuring state management and delegated event handling work smoothly -->
 <script>
-    // --- STATE MANAGEMENT ---
+    // --- STATE ENGINE & PERSISTENCE ---
     const defaultTodos = [
         { id: "1", text: "Setup project repository", completed: true },
         { id: "2", text: "Design HTML/CSS layout", completed: true }
@@ -40,6 +61,7 @@
     let todos = JSON.parse(localStorage.getItem('todos')) || defaultTodos;
     let currentFilter = 'all';
 
+    // Populate initial default data if storage is empty
     if (!localStorage.getItem('todos')) {
         localStorage.setItem('todos', JSON.stringify(todos));
     }
@@ -53,16 +75,18 @@
         localStorage.setItem('todos', JSON.stringify(todos));
     }
 
-    // --- RENDER FUNCTION ---
+    // --- DYNAMIC DOM RENDER ENGINE ---
     function render() {
         todoList.innerHTML = '';
 
+        // Filter calculation based on current state
         const filteredTodos = todos.filter(todo => {
             if (currentFilter === 'active') return !todo.completed;
             if (currentFilter === 'completed') return todo.completed;
             return true;
         });
 
+        // Generate elements dynamically
         filteredTodos.forEach(todo => {
             const li = document.createElement('li');
             li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
@@ -70,19 +94,21 @@
 
             li.innerHTML = `
                 <div class="todo-content">
-                    <input type="checkbox" class="toggle-checkbox" ${todo.completed ? 'checked' : ''}>
+                    <input type="checkbox" class="toggle-checkbox" ${todo.completed ? 'checked' : ''} aria-label="Toggle completed state">
                     <span>${todo.text}</span>
                 </div>
                 <div class="actions">
-                    <button class="btn-edit">Edit</button>
-                    <button class="btn-delete">Delete</button>
+                    <button class="btn-edit" aria-label="Edit task item text">Edit</button>
+                    <button class="btn-delete" aria-label="Delete task item entry">Delete</button>
                 </div>
             `;
             todoList.appendChild(li);
         });
     }
 
-    // --- CRUD DELEGATION ---
+    // --- EVENT CONTROLLERS & CRUD HANDLING ---
+    
+    // CREATE Pipeline
     todoForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const taskText = todoInput.value.trim();
@@ -94,20 +120,23 @@
         todoInput.value = '';
     });
 
+    // Delegated Action Capture (UPDATE & DELETE)
     todoList.addEventListener('click', (e) => {
         const todoItem = e.target.closest('.todo-item');
         if (!todoItem) return;
         const id = todoItem.dataset.id;
 
+        // UPDATE: Toggle checkbox status
         if (e.target.classList.contains('toggle-checkbox')) {
             todos = todos.map(todo => todo.id === id ? { ...todo, completed: e.target.checked } : todo);
             saveToLocalStorage();
             render();
         }
 
+        // UPDATE: Inline text editing prompt
         if (e.target.classList.contains('btn-edit')) {
             const todo = todos.find(t => t.id === id);
-            const newText = prompt('Update task name:', todo.text);
+            const newText = prompt('Modify task detail name:', todo.text);
             if (newText && newText.trim()) {
                 todo.text = newText.trim();
                 saveToLocalStorage();
@@ -115,6 +144,7 @@
             }
         }
 
+        // DELETE: Remove task item out of array matrix
         if (e.target.classList.contains('btn-delete')) {
             todos = todos.filter(todo => todo.id !== id);
             saveToLocalStorage();
@@ -122,6 +152,7 @@
         }
     });
 
+    // FILTER Action Handling Routing
     filterContainer.addEventListener('click', (e) => {
         if (!e.target.classList.contains('filter-btn')) return;
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
@@ -130,6 +161,7 @@
         render();
     });
 
+    // Run layout render process on page execution load
     render();
 </script>
 </body>
