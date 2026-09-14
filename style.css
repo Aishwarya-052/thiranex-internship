@@ -134,3 +134,66 @@ button:hover, .btn-primary:hover {
 .hidden {
     display: none !important;
 }
+/* Weather Widget Layout Rules */
+.weather-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    text-align: center;
+    color: #333333;
+    font-family: sans-serif;
+}
+
+.weather-container .search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.weather-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.weather-container button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.weather-container button:hover {
+    background-color: #0056b3;
+}
+
+.weather-container .weather-info {
+    display: none;
+}
+
+.weather-container .weather-info.active {
+    display: block;
+}
+
+.weather-container .metric {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.weather-container .error-message {
+    color: #dc3545;
+    margin-top: 15px;
+    display: none;
+    font-weight: bold;
+}
+
