@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - My Portfolio</title>
+    <title>Contact Me</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Unified Navigation Bar -->
     <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html" class="active">Contact</a>
+        <div class="nav-logo">MyPortfolio</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
     </nav>
-    <main class="main-container">
-        <h2>Contact Me</h2>
-        <p>Get in touch regarding project collaborations or web development opportunities.</p>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit" class="btn-primary">Send Message</button>
-        </form>
+
+    <main class="container">
+        <h1 class="section-title">Get In Touch</h1>
+        <p style="text-align: center;">Feel free to reach out via email or connect on social media!</p>
     </main>
+
 </body>
 </html>
