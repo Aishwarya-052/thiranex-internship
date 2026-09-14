@@ -4,249 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Weather Dashboard</title>
-    <style>
-        /* Modern Layout Foundations */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* Dashboard Presentation Container */
-        .dashboard-container {
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid #2d2d2d;
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-bottom: 8px;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .description {
-            font-size: 14px;
-            color: #aaaaaa;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        /* Search Interface Fields */
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        #city-input {
-            flex: 1;
-            padding: 12px;
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        #city-input:focus {
-            border-color: #007bff;
-        }
-
-        #search-btn {
-            padding: 12px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-
-        #search-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Error Messaging Presentation */
-        .error-container {
-            background-color: #2c1517;
-            color: #ea868f;
-            border: 1px solid #842029;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* Output Data Cards & Layout Structure */
-        .weather-card {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            padding: 24px;
-            border-radius: 8px;
-            color: white;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        #city-name {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 8px;
-        }
-
-        .metric-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 12px 0;
-            font-size: 16px;
-        }
-
-        .metric-label {
-            color: #d1e2ff;
-        }
-
-        .metric-value {
-            font-weight: bold;
-        }
-
-        /* Utility Visbility Mechanics */
-        .hidden {
-            display: none !important;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-    <div class="dashboard-container">
-        <h2>Weather Dashboard</h2>
-        <p class="description">Asynchronous JavaScript & RESTful APIs Assignment</p>
+    <main class="main-container">
+        <h2>Real-Time Weather Dashboard</h2>
+        <p class="subtitle">Built with Asynchronous JavaScript & RESTful APIs</p>
         
-        <!-- Input Block Element -->
         <div class="search-box">
-            <input type="text" id="city-input" placeholder="Enter city name (e.g. London)" />
+            <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
             <button id="search-btn">Search</button>
         </div>
 
-        <!-- System Status/Error Window -->
-        <div id="error-message" class="error-container hidden"></div>
+        <div id="error-message" class="error-card hidden"></div>
 
-        <!-- Main Display Component -->
         <div id="weather-result" class="weather-card hidden">
-            <div id="city-name">--</div>
-            
+            <h3 id="city-name">--</h3>
             <div class="metric-row">
-                <span class="metric-label">Temperature:</span>
-                <span><span id="temp">--</span>°C</span>
+                <span>Temperature:</span>
+                <strong><span id="temp">--</span>°C</strong>
             </div>
-            
             <div class="metric-row">
-                <span class="metric-label">Humidity:</span>
-                <span><span id="humidity">--</span>%</span>
+                <span>Humidity:</span>
+                <strong><span id="humidity">--</span>%</strong>
             </div>
-            
             <div class="metric-row">
-                <span class="metric-label">Wind Speed:</span>
-                <span><span id="wind-speed">--</span> m/s</span>
+                <span>Wind Speed:</span>
+                <strong><span id="wind-speed">--</span> m/s</strong>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Core Runtime Execution Logic -->
-    <script>
-        // Free production verification keys configuration
-        const API_KEY = '853823cd0841b5702dd395c52c2ad31d'; 
-        const BASE_URL = 'https://openweathermap.org';
-
-        const searchBtn = document.getElementById('search-btn');
-        const cityInput = document.getElementById('city-input');
-        const weatherCard = document.getElementById('weather-result');
-        const errorDiv = document.getElementById('error-message');
-
-        // Application Execution Contexts
-        searchBtn.addEventListener('click', executeWeatherFetch);
-        cityInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') executeWeatherFetch();
-        });
-
-        // Async Context Operations
-        async function executeWeatherFetch() {
-            const city = cityInput.value.trim();
-            
-            // Clean interface workspace variables
-            weatherCard.classList.add('hidden');
-            errorDiv.classList.add('hidden');
-
-            if (!city) {
-                renderUIError("Please type a location name first.");
-                return;
-            }
-
-            try {
-                // Fetch dynamic targets via standard methods
-                const endpoint = `${BASE_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
-                const response = await fetch(endpoint);
-                
-                // Comprehensive Exception Handling Mechanics
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        throw new Error("City layout target not located. Check query syntax.");
-                    } else {
-                        throw new Error(`Data pipeline breakdown (Status: ${response.status})`);
-                    }
-                }
-
-                // Complex response processing actions
-                const payloadData = await response.json();
-                populateDOMDashboard(payloadData);
-
-            } catch (runtimeException) {
-                renderUIError(runtimeException.message || "A network pipeline connection interruption occurred.");
-            }
-        }
-
-        // DOM Mapping Functions
-        function populateDOMDashboard(data) {
-            // Complex nested JSON key targeting schema map
-            document.getElementById('city-name').textContent = `${data.name}, ${data.sys.country}`;
-            document.getElementById('temp').textContent = Math.round(data.main.temp);
-            document.getElementById('humidity').textContent = data.main.humidity;
-            document.getElementById('wind-speed').textContent = data.wind.speed;
-
-            // Render updated canvas frame interface layout
-            weatherCard.classList.remove('hidden');
-        }
-
-        function renderUIError(errorText) {
-            errorDiv.textContent = errorText;
-            errorDiv.classList.remove('hidden');
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
