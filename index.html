@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - My Portfolio</title>
+    <title>My Portfolio & Weather Dashboard</title>
+    <!-- Link to your existing style sheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html" class="active">Home</a>
+
+    <!-- Your existing navigation bar can go here -->
+    <nav>
+        <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
     </nav>
-    <main class="main-container">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Explore my latest developments, including asynchronous web applications and API integrations.</p>
-        <a href="projects.html" class="btn-primary">View Weather Dashboard</a>
+
+    <!-- Weather Dashboard Section Component -->
+    <main class="weather-container">
+        <h2>Live Weather Dashboard</h2>
+        
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
+            <button id="search-btn">Search</button>
+        </div>
+
+        <div id="error-display" class="error-message"></div>
+
+        <div id="weather-display" class="weather-info">
+            <h3 id="city-name">City Name</h3>
+            <div class="metric">🌡️ <strong>Temperature:</strong> <span id="temp">--</span>°C</div>
+            <div class="metric">💧 <strong>Humidity:</strong> <span id="humidity">--</span>%</div>
+            <div class="metric">💨 <strong>Wind Speed:</strong> <span id="wind">--</span> m/s</div>
+        </div>
     </main>
+
+    <!-- Link to your interactive JS script -->
+    <script src="app.js"></script>
 </body>
 </html>
