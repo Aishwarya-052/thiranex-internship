@@ -3,74 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me | Jane Doe Portfolio</title>
-    <meta name="description" content="Get in touch with Jane Doe for web development projects.">
-    <meta name="robots" content="index, follow">
-    <style>
-        :root {
-            --bg-main: #f8fafc;
-            --bg-card: #ffffff;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: system-ui, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.6; padding: 0 1rem; }
-        header { max-width: 600px; margin: 0 auto; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
-        header h1 { font-size: 1.5rem; color: var(--primary); }
-        nav ul { list-style: none; display: flex; gap: 1.5rem; }
-        nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
-        nav a:hover, nav a:focus { color: var(--primary); outline: none; }
-        nav a[aria-current="page"] { color: var(--primary); border-bottom: 2px solid var(--primary); }
-        main { max-width: 600px; margin: 3rem auto; background: var(--bg-card); padding: 2.5rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .section-title { font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .subtitle { color: var(--text-muted); margin-bottom: 2rem; }
-        form { display: flex; flex-direction: column; gap: 1.5rem; }
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        label { font-weight: 600; font-size: 0.95rem; }
-        input, textarea { padding: 0.75rem; font-size: 1rem; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #fff; width: 100%; color: var(--text-dark); }
-        input:focus, textarea:focus { outline: 3px solid var(--primary); border-color: transparent; }
-        button { padding: 0.85rem; background-color: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 6px; font-size: 1rem; transition: background 0.2s; }
-        button:hover { background-color: var(--primary-hover); }
-        button:focus { outline: 3px solid var(--text-dark); }
-        footer { max-width: 600px; margin: 4rem auto 2rem auto; text-align: center; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #e2e8f0; padding-top: 2rem; }
-    </style>
+    <title>Contact - My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Jane Doe</h1>
-        <nav aria-label="Main Website Navigation">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html" aria-current="page">Contact Me</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main id="main-content">
-        <section aria-labelledby="contact-heading">
-            <h2 id="contact-heading" class="section-title">Contact Me</h2>
-            <p class="subtitle">Please fill out the keyboard-accessible form parameters below.</p>
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label id="label-name" for="user-name">Full Name (Required)</label>
-                    <input type="text" id="user-name" name="name" required aria-labelledby="label-name">
-                </div>
-                <div class="form-group">
-                    <label id="label-email" for="user-email">Email Address (Required)</label>
-                    <input type="email" id="user-email" name="email" required aria-labelledby="label-email">
-                </div>
-                <div class="form-group">
-                    <label id="label-message" for="user-message">Your Message (Required)</label>
-                    <textarea id="user-message" name="message" rows="5" required aria-labelledby="label-message"></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <main class="main-container">
+        <h2>Contact Me</h2>
+        <p>Get in touch regarding project collaborations or web development opportunities.</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
     </main>
-    <footer>
-        <p>&copy; 2026 Jane Doe. All rights reserved.</p>
-    </footer>
 </body>
 </html>
