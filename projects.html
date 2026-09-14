@@ -3,166 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Thiranex Tasks</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Projects - Weather Dashboard</title>
+    <style>
+        /* Modern Layout Foundations */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Dashboard Presentation Container */
+        .dashboard-container {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #2d2d2d;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #aaaaaa;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        /* Search Interface Fields */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #city-input {
+            flex: 1;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #city-input:focus {
+            border-color: #007bff;
+        }
+
+        #search-btn {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        #search-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Error Messaging Presentation */
+        .error-container {
+            background-color: #2c1517;
+            color: #ea868f;
+            border: 1px solid #842029;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Output Data Cards & Layout Structure */
+        .weather-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 24px;
+            border-radius: 8px;
+            color: white;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        #city-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 16px;
+        }
+
+        .metric-label {
+            color: #d1e2ff;
+        }
+
+        .metric-value {
+            font-weight: bold;
+        }
+
+        /* Utility Visbility Mechanics */
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
-<header>
-    <nav>
-        <div class="brand-section">
-            <span class="brand-title">Thiranex</span>
-            <span class="brand-subtitle">Skill Development & Future Tech</span>
-        </div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html" class="active">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main id="main-content">
-    <h1>JavaScript Logic & State Management</h1>
-    <p>Develop an interactive, client-side To-Do List application to master DOM manipulation, event handling, and local data persistence.</p>
-    
-    <div class="todo-container">
-        <!-- CREATE Feature Component -->
-        <form id="todo-form" class="input-group">
-            <input type="text" id="todo-input" placeholder="Add a new task objective..." required>
-            <button type="submit" class="btn-add">Add</button>
-        </form>
-
-        <!-- ADVANCED FILTERING Controls -->
-        <div class="filters" id="filter-container">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="active">Active</button>
-            <button class="filter-btn" data-filter="completed">Completed</button>
+    <div class="dashboard-container">
+        <h2>Weather Dashboard</h2>
+        <p class="description">Asynchronous JavaScript & RESTful APIs Assignment</p>
+        
+        <!-- Input Block Element -->
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Enter city name (e.g. London)" />
+            <button id="search-btn">Search</button>
         </div>
 
-        <!-- READ, UPDATE, DELETE Dynamic List Container -->
-        <ul class="todo-list" id="todo-list"></ul>
+        <!-- System Status/Error Window -->
+        <div id="error-message" class="error-container hidden"></div>
+
+        <!-- Main Display Component -->
+        <div id="weather-result" class="weather-card hidden">
+            <div id="city-name">--</div>
+            
+            <div class="metric-row">
+                <span class="metric-label">Temperature:</span>
+                <span><span id="temp">--</span>°C</span>
+            </div>
+            
+            <div class="metric-row">
+                <span class="metric-label">Humidity:</span>
+                <span><span id="humidity">--</span>%</span>
+            </div>
+            
+            <div class="metric-row">
+                <span class="metric-label">Wind Speed:</span>
+                <span><span id="wind-speed">--</span> m/s</span>
+            </div>
+        </div>
     </div>
-</main>
 
-<footer>
-    <p>System developed and maintained by Team Emogi (emogi.in)</p>
-</footer>
+    <!-- Core Runtime Execution Logic -->
+    <script>
+        // Free production verification keys configuration
+        const API_KEY = '853823cd0841b5702dd395c52c2ad31d'; 
+        const BASE_URL = 'https://openweathermap.org';
 
-<script>
-    // --- STATE ENGINE & PERSISTENCE ---
-    const defaultTodos = [
-        { id: "1", text: "Setup project repository", completed: true },
-        { id: "2", text: "Design HTML/CSS layout", completed: true }
-    ];
+        const searchBtn = document.getElementById('search-btn');
+        const cityInput = document.getElementById('city-input');
+        const weatherCard = document.getElementById('weather-result');
+        const errorDiv = document.getElementById('error-message');
 
-    let todos = JSON.parse(localStorage.getItem('todos')) || defaultTodos;
-    let currentFilter = 'all';
-
-    // Populate initial default data if storage is empty
-    if (!localStorage.getItem('todos')) {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }
-
-    const todoForm = document.getElementById('todo-form');
-    const todoInput = document.getElementById('todo-input');
-    const todoList = document.getElementById('todo-list');
-    const filterContainer = document.getElementById('filter-container');
-
-    function saveToLocalStorage() {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }
-
-    // --- DYNAMIC DOM RENDER ENGINE ---
-    function render() {
-        todoList.innerHTML = '';
-
-        // Filter calculation based on current state
-        const filteredTodos = todos.filter(todo => {
-            if (currentFilter === 'active') return !todo.completed;
-            if (currentFilter === 'completed') return todo.completed;
-            return true;
+        // Application Execution Contexts
+        searchBtn.addEventListener('click', executeWeatherFetch);
+        cityInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') executeWeatherFetch();
         });
 
-        // Generate elements dynamically
-        filteredTodos.forEach(todo => {
-            const li = document.createElement('li');
-            li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
-            li.dataset.id = todo.id;
+        // Async Context Operations
+        async function executeWeatherFetch() {
+            const city = cityInput.value.trim();
+            
+            // Clean interface workspace variables
+            weatherCard.classList.add('hidden');
+            errorDiv.classList.add('hidden');
 
-            li.innerHTML = `
-                <div class="todo-content">
-                    <input type="checkbox" class="toggle-checkbox" ${todo.completed ? 'checked' : ''} aria-label="Toggle completed state">
-                    <span>${todo.text}</span>
-                </div>
-                <div class="actions">
-                    <button class="btn-edit" aria-label="Edit task item text">Edit</button>
-                    <button class="btn-delete" aria-label="Delete task item entry">Delete</button>
-                </div>
-            `;
-            todoList.appendChild(li);
-        });
-    }
+            if (!city) {
+                renderUIError("Please type a location name first.");
+                return;
+            }
 
-    // --- EVENT CONTROLLERS & CRUD HANDLING ---
-    
-    // CREATE Pipeline
-    todoForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const taskText = todoInput.value.trim();
-        if (!taskText) return;
+            try {
+                // Fetch dynamic targets via standard methods
+                const endpoint = `${BASE_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
+                const response = await fetch(endpoint);
+                
+                // Comprehensive Exception Handling Mechanics
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error("City layout target not located. Check query syntax.");
+                    } else {
+                        throw new Error(`Data pipeline breakdown (Status: ${response.status})`);
+                    }
+                }
 
-        todos.push({ id: Date.now().toString(), text: taskText, completed: false });
-        saveToLocalStorage();
-        render();
-        todoInput.value = '';
-    });
+                // Complex response processing actions
+                const payloadData = await response.json();
+                populateDOMDashboard(payloadData);
 
-    // Delegated Action Capture (UPDATE & DELETE)
-    todoList.addEventListener('click', (e) => {
-        const todoItem = e.target.closest('.todo-item');
-        if (!todoItem) return;
-        const id = todoItem.dataset.id;
-
-        // UPDATE: Toggle checkbox status
-        if (e.target.classList.contains('toggle-checkbox')) {
-            todos = todos.map(todo => todo.id === id ? { ...todo, completed: e.target.checked } : todo);
-            saveToLocalStorage();
-            render();
-        }
-
-        // UPDATE: Inline text editing prompt
-        if (e.target.classList.contains('btn-edit')) {
-            const todo = todos.find(t => t.id === id);
-            const newText = prompt('Modify task detail name:', todo.text);
-            if (newText && newText.trim()) {
-                todo.text = newText.trim();
-                saveToLocalStorage();
-                render();
+            } catch (runtimeException) {
+                renderUIError(runtimeException.message || "A network pipeline connection interruption occurred.");
             }
         }
 
-        // DELETE: Remove task item out of array matrix
-        if (e.target.classList.contains('btn-delete')) {
-            todos = todos.filter(todo => todo.id !== id);
-            saveToLocalStorage();
-            render();
+        // DOM Mapping Functions
+        function populateDOMDashboard(data) {
+            // Complex nested JSON key targeting schema map
+            document.getElementById('city-name').textContent = `${data.name}, ${data.sys.country}`;
+            document.getElementById('temp').textContent = Math.round(data.main.temp);
+            document.getElementById('humidity').textContent = data.main.humidity;
+            document.getElementById('wind-speed').textContent = data.wind.speed;
+
+            // Render updated canvas frame interface layout
+            weatherCard.classList.remove('hidden');
         }
-    });
 
-    // FILTER Action Handling Routing
-    filterContainer.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('filter-btn')) return;
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
-        currentFilter = e.target.dataset.filter;
-        render();
-    });
-
-    // Run layout render process on page execution load
-    render();
-</script>
+        function renderUIError(errorText) {
+            errorDiv.textContent = errorText;
+            errorDiv.classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
