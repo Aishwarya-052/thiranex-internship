@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio & Weather Dashboard</title>
-    <!-- Link to your existing style sheet -->
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Your existing navigation bar can go here -->
-    <nav>
-        <a href="index.html">Home</a>
+    <!-- Unified Navbar Component -->
+    <nav class="navbar">
+        <a href="index.html" class="active">Home</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
     </nav>
 
-    <!-- Weather Dashboard Section Component -->
-    <main class="weather-container">
+    <!-- Content Block -->
+    <main class="main-container">
         <h2>Live Weather Dashboard</h2>
+        <p class="subtitle">Enter a city to get real-time atmospheric data.</p>
         
         <div class="search-box">
             <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
             <button id="search-btn">Search</button>
         </div>
 
-        <div id="error-display" class="error-message"></div>
+        <!-- Displays error alerts safely inside your dark card -->
+        <div id="error-display" class="error-card hidden"></div>
 
-        <div id="weather-display" class="weather-info">
+        <!-- Weather output dashboard wrapper -->
+        <div id="weather-display" class="weather-card hidden">
             <h3 id="city-name">City Name</h3>
-            <div class="metric">🌡️ <strong>Temperature:</strong> <span id="temp">--</span>°C</div>
-            <div class="metric">💧 <strong>Humidity:</strong> <span id="humidity">--</span>%</div>
-            <div class="metric">💨 <strong>Wind Speed:</strong> <span id="wind">--</span> m/s</div>
+            <div class="metric-row"><span>🌡️ Temperature:</span> <span id="temp">--</span>°C</div>
+            <div class="metric-row"><span>💧 Humidity:</span> <span id="humidity">--</span>%</div>
+            <div class="metric-row"><span>💨 Wind Speed:</span> <span id="wind">--</span> m/s</div>
         </div>
     </main>
 
-    <!-- Link to your interactive JS script -->
     <script src="app.js"></script>
 </body>
 </html>
