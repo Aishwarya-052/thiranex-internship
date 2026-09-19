@@ -3,51 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Projects</title>
+    <title>ShopSphere | Capstone Product Catalog</title>
+    <!-- Optimized Font Loading -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Unified Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-logo">MyPortfolio</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html" class="active">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Projects Grid Section -->
-    <main class="container">
-        <h1 class="section-title">My Creative Projects</h1>
-        
-        <div class="projects-grid">
-            <!-- Project Card 1: Weather Dashboard -->
-            <div class="project-card">
-                <div class="project-icon">🌤️</div>
-                <h3>Weather Dashboard</h3>
-                <p>A live app fetching real-time JSON metrics (temperature, humidity, wind) from a REST API using async/await JavaScript.</p>
-                <a href="index.html" class="project-link">Launch Project →</a>
-            </div>
-
-            <!-- Project Card 2: Placeholder for another project -->
-            <div class="project-card">
-                <div class="project-icon">💻</div>
-                <h3>Project Two</h3>
-                <p>A brief description of your next awesome web development project or application will go right here.</p>
-                <span class="project-link coming-soon">Coming Soon</span>
-            </div>
-
-            <!-- Project Card 3: Placeholder for another project -->
-            <div class="project-card">
-                <div class="project-icon">📱</div>
-                <h3>Project Three</h3>
-                <p>A brief description of another application, mobile layout, or front-end interface built with modern web tools.</p>
-                <span class="project-link coming-soon">Coming Soon</span>
-            </div>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#/" class="logo">🛒 ShopSphere</a>
+            <nav class="nav-links">
+                <a href="#/" class="nav-link">Home</a>
+                <a href="#/catalog" class="nav-link">Catalog</a>
+                <a href="#/contact" class="nav-link">Contact</a>
+            </nav>
         </div>
-    </main>
+    </header>
 
+    <!-- Main router mount target -->
+    <main id="app-root" class="container"></main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ShopSphere Engine. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js" type="module"></script>
 </body>
 </html>
