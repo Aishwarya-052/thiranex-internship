@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopSphere | Capstone Product Catalog</title>
-    <!-- Optimized Font Loading -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>My Portfolio | Projects</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="#/" class="logo">🛒 ShopSphere</a>
-            <nav class="nav-links">
-                <a href="#/" class="nav-link">Home</a>
-                <a href="#/catalog" class="nav-link">Catalog</a>
-                <a href="#/contact" class="nav-link">Contact</a>
-            </nav>
-        </div>
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Main router mount target -->
-    <main id="app-root" class="container"></main>
+    <main class="content-section">
+        <h2>My Completed Projects</h2>
+        <div class="projects-grid">
+            <!-- Project Card Example -->
+            <div class="project-card">
+                <h3>E-Commerce Product Catalog</h3>
+                <p>A full-stack responsive web application featuring modular frontend components and client-side page routing.</p>
+                <span class="tech-tag">HTML5</span> <span class="tech-tag">CSS3</span> <span class="tech-tag">JavaScript</span>
+            </div>
+        </div>
+    </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 ShopSphere Engine. All rights reserved.</p>
+    <footer>
+        <p>&copy; 2026 Aishwarya. All rights reserved.</p>
     </footer>
 
-    <script src="app.js" type="module"></script>
+    <script src="app.js"></script>
 </body>
 </html>
