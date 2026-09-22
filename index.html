@@ -3,37 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>My Portfolio | Home</title>
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Unified Navbar Component -->
-    <nav class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+    <main class="hero-section">
+        <h1>Welcome to My Professional Portfolio</h1>
+        <p>Hi, I'm a developer building responsive web applications and clean digital architecture.</p>
+        <a href="projects.html" class="btn">View My Work</a>
+    </main>
 
-    <!-- Content Block -->
-    <main class="main-container">
-        <h2>Live Weather Dashboard</h2>
-        <p class="subtitle">Enter a city to get real-time atmospheric data.</p>
-        
-        <div class="search-box">
-            <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
-            <button id="search-btn">Search</button>
-        </div>
+    <footer>
+        <p>&copy; 2026 Aishwarya. All rights reserved.</p>
+    </footer>
 
-        <!-- Displays error alerts safely inside your dark card -->
-        <div id="error-display" class="error-card hidden"></div>
-
-        <!-- Weather output dashboard wrapper -->
-        <div id="weather-display" class="weather-card hidden">
-            <h3 id="city-name">City Name</h3>
-            <div class="metric-row"><span>🌡️ Temperature:</span> <span id="temp">--</span>°C</div>
-            <div class="metric-row"><span>💧 Humidity:</span> <span id="humidity">--</span>%</div>
-            <div class="metric-row"><span>💨 Wind Speed:</span> <span id="wind">--</span> m/s</div>
+    <!-- Link to external JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
         </div>
     </main>
 
