@@ -1,39 +1,24 @@
-const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY_HERE'; 
-const BASE_URL = 'https://openweathermap.org';
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Portfolio JavaScript loaded successfully.");
 
-const cityInput = document.getElementById('city-input');
-const searchBtn = document.getElementById('search-btn');
-const weatherDisplay = document.getElementById('weather-display');
-const errorDisplay = document.getElementById('error-display');
+    // Handle Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Stop page refresh
 
-const cityNameEl = document.getElementById('city-name');
-const tempEl = document.getElementById('temp');
-const humidityEl = document.getElementById('humidity');
-const windEl = document.getElementById('wind');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
 
-if (searchBtn && cityInput) {
-    searchBtn.addEventListener('click', () => handleSearch());
-    cityInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSearch();
-    });
-}
-
-function handleSearch() {
-    const city = cityInput.value.trim();
-    if (city) {
-        getWeatherData(city);
+            // Display confirmation feedback (or handle an API post request)
+            alert(`Thank you, ${name}! Your message has been simulated successfully.`);
+            
+            // Clear input fields
+            contactForm.reset();
+        });
     }
-}
-
-async function getWeatherData(city) {
-    errorDisplay.style.display = 'none';
-    weatherDisplay.classList.remove('active');
-
-    try {
-        const url = `${BASE_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
+});
             if (response.status === 404) {
                 throw new Error('City not found. Check spelling!');
             } else {
